@@ -16,10 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from enc.views import home
+from enc.views import welcome
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^encapp/', include('encapp.urls')),
-    url(r'^$', home),
+    #url(r'^encapp/', include('encapp.urls')),
+    url(r'^users/', include('users.urls')),
+    url(r'^$', welcome, name='welcome'),
+    url(r'users/', include('django.contrib.auth.urls')),
 ]
