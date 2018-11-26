@@ -13,9 +13,8 @@ Login
           <p>Please login</p>
             {{ form | crispy }}
           <button type="submit" class="btn btn-success">Login</button>
-            <br style = “line-height:1;”><br>
+            <br style = “line-height:1px;”><br>
             <p>Haven't signed up yet?</p>
             <a href="{% url 'signup' %}" class="btn btn-primary">Signup!</a>
-          <!--<button type="submit" class="btn btn-success">Sign Up!</button>-->
     </form>
 {% endblock %}

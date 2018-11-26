@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} {{ article.title }} {% endblock %}
+
+{% block content %}
+    {% if options %}
+    <div class="col-md-24"><p>The search results are:</p>
+        {% for i in options %}
+        <form action="{% url 'search' %}" method="get" class="suggest">
+            <ul><input type="submit" value="{{ i }}" class="suggestSubmit"></ul>
+        </form>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div id="article">
+        {{ article.html_content | safe }}
+    </div>
+    {% endif %}
+{% endblock %}

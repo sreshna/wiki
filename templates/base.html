@@ -31,9 +31,16 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-              <li><a href="{% url 'user_logout' %}">Logout</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_home' %}"> {{ user.username }} </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_logout' %}">Logout</a>
+                </li>
             {% else %}
-              <li><a href="{% url 'user_login' %}">Login</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+                </li>
             {% endif %}
         </ul>
       </div>
@@ -48,7 +55,7 @@
         <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.2.min.js' %}"><\/script>')</script>
 
         <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-
         <script src="{% static 'js/main.js' %}"></script>
+        <script src="{% static 'js/search.js' %}"></script>
     </body>
 </html>

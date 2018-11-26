@@ -20,8 +20,8 @@ from enc.views import welcome
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    #url(r'^encapp/', include('encapp.urls')),
+    url(r'^', include('encapp.urls')),
     url(r'^users/', include('users.urls')),
-    url(r'^$', welcome, name='welcome'),
+    url(r'^welcome', welcome, name='welcome'),
     url(r'users/', include('django.contrib.auth.urls')),
 ]
