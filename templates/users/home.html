@@ -4,5 +4,20 @@
 {% endblock %}
 
 {% block content %}
-    <p>Your favourite articles are:</p>
+            {% if user.is_authenticated %}
+            <p>Your favourite articles are:</p>
+                {% if favorites %}
+                    {% for i in favorites %}
+                        <form action="{% url 'search' %}" method="get" class="suggest">
+                            <a class="nav-link" href="{% url 'search' %}"> {{ i }} </a>
+                        </form>
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user_login' %}">Login</a>
+                </li>
+            {% endif %}
+
+
 {% endblock %}

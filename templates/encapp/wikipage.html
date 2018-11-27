@@ -12,6 +12,16 @@
         {% endfor %}
     </div>
     {% else %}
+        {% if user.is_authenticated %}
+            <p align="center">
+                <input type="hidden" id="favoriteTitle" name="q" value="{{ article.title }}">
+
+                <a class="btn btn-primary" id="add_to_favorite">Add to favorite</a>
+            </p>
+            <div id="favoriteResponse">
+                 <!-- load favorite success response here -->
+            </div>
+        {% endif %}
     <div id="article">
         {{ article.html_content | safe }}
     </div>

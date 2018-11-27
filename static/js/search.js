@@ -1,4 +1,5 @@
-var $response = $("#uploadResponse")
+var $response = $("#uploadResponse");
+var $favorite_response = $("#favoriteResponse");
 
 $("#search_button").click(function(e) {
     e.preventDefault();
@@ -24,6 +25,25 @@ $('.suggestSubmit').click(function(e) {
     success: function(response) {
     $response.empty();
     $response.append(response);
+      }
+    })
+});
+
+$('#add_to_favorite').click(function(e) {
+    e.preventDefault();
+    var title = $("#favoriteTitle").val();
+    console.log(title)
+    $.ajax({
+    type: "get",
+    dataType: 'json',
+    contentType: 'json',
+    crossDomain: true,
+    url: '/favorite/',
+    data: {"title": title},
+    success: function(context) {
+    console.log(context);
+    $favorite_response.empty();
+    $favorite_response.append(context);
       }
     })
 });

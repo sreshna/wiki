@@ -5,5 +5,7 @@ from encapp import views
 urlpatterns = [
     url(r'^$', views.search_form, name='search'),
     url(r'^search/', views.search, name='search'),
+    url(r'^favorite/', views.FavoritesCreateView.as_view(), name='favorite'),
+    url(r'^favorites/', views.FavoritesCreateView.as_view(), name='favorites'),
     url(r'^suggest/$', views.suggest, name='suggest'),
 ]

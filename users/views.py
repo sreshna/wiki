@@ -6,10 +6,15 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from encapp.models import Favorites
+
 
 @login_required
 def home(request):
-    return render(request, "users/home.html")
+    favorites = Favorites.objects.all().filter(user=request.user)
+    return render(request, template_name="users/home.html",
+                  context={"favorites": favorites})
+    # return render(request, "users/home.html")
 
 
 class SignUp(generic.CreateView):
