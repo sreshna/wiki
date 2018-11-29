@@ -20,7 +20,23 @@ $('.suggestSubmit').click(function(e) {
     var q = $(this).val();
     $.ajax({
     type: "GET",
-    url: '/suggest/',
+    url: '/search/',
+    data: {"q": q},
+    success: function(response) {
+    $response.empty();
+    $response.append(response);
+      }
+    })
+});
+
+$('.favoriteSubmit').click(function(e) {
+    e.preventDefault();
+    console.log(e);
+    console.log($(this));
+    var q = $(this).val();
+    $.ajax({
+    type: "GET",
+    url: '/search/',
     data: {"q": q},
     success: function(response) {
     $response.empty();
@@ -32,7 +48,6 @@ $('.suggestSubmit').click(function(e) {
 $('#add_to_favorite').click(function(e) {
     e.preventDefault();
     var title = $("#favoriteTitle").val();
-    console.log(title)
     $.ajax({
     type: "get",
     dataType: 'json',
@@ -41,7 +56,6 @@ $('#add_to_favorite').click(function(e) {
     url: '/favorite/',
     data: {"title": title},
     success: function(context) {
-    console.log(context);
     $favorite_response.empty();
     $favorite_response.append(context);
       }

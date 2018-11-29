@@ -1,15 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 import wikipedia as wiki
-from django.views.generic import CreateView
-from django.views.generic import ListView
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 
 from encapp.models import Favorites
 
 
-def search_form(request):
-    return render(request, 'enc/welcome.html')
+class HomeView(TemplateView):
+    template_name = "enc/welcome.html"
 
 
 def search(request):
@@ -19,19 +17,8 @@ def search(request):
     except wiki.DisambiguationError as e:
         return render(request, template_name="encapp/wikipage.html",
                       context={"options": e.options})
-
     except:
         return HttpResponse('You submitted an empty form')
-    return render(request, template_name="encapp/wikipage.html",
-                  context={"article": {
-                      "title": title,
-                      "html_content": result
-                  }})
-
-
-def suggest(request):
-    title = request.GET['q']
-    result = wiki.WikipediaPage(title=title).html()
     return render(request, template_name="encapp/wikipage.html",
                   context={"article": {
                       "title": title,
@@ -45,11 +32,3 @@ class FavoritesCreateView(View):
         fav = Favorites.objects.create(title=title, user=request.user)
         return render(request, template_name="encapp/wikipage.html",
                       context={"favorites": fav})
-
-
-class FavoriteListView(ListView):
-
-    def get(self, request, *args, **kwargs):
-        favorites = Favorites.objects.all().filter(user=request.user)
-        return render(request, template_name="encapp/wikipage.html",
-                      context={"favorites": favorites})
