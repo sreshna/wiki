@@ -29,22 +29,6 @@ $('.suggestSubmit').click(function(e) {
     })
 });
 
-$('.favoriteSubmit').click(function(e) {
-    e.preventDefault();
-    console.log(e);
-    console.log($(this));
-    var q = $(this).val();
-    $.ajax({
-    type: "GET",
-    url: '/search/',
-    data: {"q": q},
-    success: function(response) {
-    $response.empty();
-    $response.append(response);
-      }
-    })
-});
-
 $('#add_to_favorite').click(function(e) {
     e.preventDefault();
     var title = $("#favoriteTitle").val();
@@ -58,6 +42,37 @@ $('#add_to_favorite').click(function(e) {
     success: function(context) {
     $favorite_response.empty();
     $favorite_response.append(context);
+      }
+    })
+});
+
+
+$('.lang_option').on('change',function() {
+    e.preventDefault();
+    console.log(e);
+    console.log($(this));
+    var q = $(this).val();
+    $.ajax({
+    type: "GET",
+    url: '/language/',
+    data: {"q": q},
+    success: function(response) {
+    $response.empty();
+    $response.append(response);
+      }
+    })
+});
+
+$('.favoriteSubmit').click(function(e) {
+    e.preventDefault();
+    var q = $(this).val();
+    $.ajax({
+    type: "GET",
+    url: '/favorites/',
+    data: {"q": q},
+    success: function(response) {
+    $favorite_response.empty();
+    $favorite_response.append(response);
       }
     })
 });

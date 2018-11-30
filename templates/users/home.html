@@ -8,9 +8,12 @@
             <p>Your favourite articles are:</p>
                 {% if favorites %}
                     {% for i in favorites %}
-                        <form action="{% url 'search' %}" method="get" class="suggest">
-                            <a class="nav-link" href="{% url 'search' %}"> {{ i }} </a>
+                        <form action="/search/" method="get" onsubmit="{% url 'search' %}" target="_blank">
+                            <input type="submit" value="{{ i }}" class="favoriteSubmit list-group-item">
                         </form>
+                        <!--<form action="{% url 'search' %}" method="get" class="suggest">-->
+                            <!--<button class="nav-link" href="{% url 'search' %}"> {{ i }} </button>-->
+                        <!--</form>-->
                     {% endfor %}
                 {% endif %}
             {% else %}
@@ -18,6 +21,7 @@
                     <a class="nav-link" href="{% url 'user_login' %}">Login</a>
                 </li>
             {% endif %}
-
-
+            <div class="col-md-4" id="favoriteResponse">
+                <!-- Response from ajax request -->
+            </div>
 {% endblock %}

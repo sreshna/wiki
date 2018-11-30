@@ -4,20 +4,26 @@
 
 {% block content %}
     {% if options %}
-    <div class="col-md-24"><p>The search results are:</p>
-        {% for i in options %}
-        <form action="{% url 'search' %}" method="get" class="suggest">
-            <ul><input type="submit" value="{{ i }}" class="suggestSubmit"></ul>
-        </form>
-        {% endfor %}
-    </div>
+        <h5>The search results are:</h5>
+            <ul class="list-group">
+                {% for i in options %}
+                    <form action="{% url 'search' %}" method="get" class="suggest" target="_blank">
+                        <input type="hidden" name="q" value="{{ i }}">
+                        <input type="submit" value="{{ i }}" class="list-group-item">
+                    </form>
+                {% endfor %}
+            </ul>
     {% else %}
-        {% if user.is_authenticated %}
-            <p align="center">
-                <input type="hidden" id="favoriteTitle" name="q" value="{{ article.title }}">
-              <a class="btn btn-primary" id="add_to_favorite" style="float:right;">Add to favorites</a>
-            </p>
-        {% endif %}
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-offset-3">
+                <p align="center">
+                    <input type="hidden" id="favoriteTitle" name="q" value="{{ article.title }}">
+                <a class="btn btn-primary" id="add_to_favorite" style="float:right;">Add to favorites</a>
+                </p>
+            </div>
+        </div>
+    {% endif %}
     <div id="article">
         {{ article.html_content | safe }}
     </div>
