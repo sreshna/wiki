@@ -4,24 +4,29 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-md-3" align="left">
+            <div class="jumbotron">
             {% if user.is_authenticated %}
-            <p>Your favourite articles are:</p>
+            <h5>Your favourite articles are:</h5>
                 {% if favorites %}
                     {% for i in favorites %}
                         <form action="/search/" method="get" onsubmit="{% url 'search' %}" target="_blank">
                             <input type="submit" value="{{ i }}" class="favoriteSubmit list-group-item">
                         </form>
-                        <!--<form action="{% url 'search' %}" method="get" class="suggest">-->
-                            <!--<button class="nav-link" href="{% url 'search' %}"> {{ i }} </button>-->
-                        <!--</form>-->
                     {% endfor %}
                 {% endif %}
+            </div>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'user_login' %}">Login</a>
                 </li>
             {% endif %}
+        </div>
+        <div class="col-md-9">
             <div class="col-md-4" id="favoriteResponse">
                 <!-- Response from ajax request -->
             </div>
+        </div>
+    </div>
 {% endblock %}
